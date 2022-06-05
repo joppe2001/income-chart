@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- displays site properly based on user's device -->
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="stylesheet" href="resources/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Frontend Mentor | Expenses chart component</title>
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+</head>
+
+<body>
+    <main>
+        <div class="center-column">
+            <div class="balance-info">
+                <div class="money">
+                    <p>
+                        My balance
+                    </p>
+                    <p id="balance">
+                        $921.48
+                    </p>
+                </div>
+                <div class="image">
+                    <img src="images/logo.svg" alt="logo-icon">
+                </div>
+            </div>
+            <div class="small-container">
+                <div class="top-text">
+                    <h1>
+                        Spending - Last 7 days
+                    </h1>
+                    <canvas id="myChart"></canvas>
+                </div>
+                <hr style="width: 85%; opacity: 0.3">
+                <div class="footer-small-container">
+                    <div class="total-this-month">
+                        <p id="opacity-set" style="font-size: 0.8rem">
+                            Total this month
+                        </p>
+                        <p id="total-this-month">
+                            $478.33
+                        </p>
+                    </div>
+                    <div class="percent-last-month">
+                        <p>
+                            +2.4%
+                        </p>
+                        <p id="opacity-set">
+                            from last month
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<!-- <script src="./javascript/script.js"></script> -->
+<script>
+    const updateChart = () => {
+        //fetch block
+        async function fetchData() {
+            const jsonFile = './data.json';
+            const response = await fetch(jsonFile);
+            //wait for accepted request//
+            const dataPoints = await response.json();
+            //check if data is loaded//
+            console.log(dataPoints);
+            return dataPoints
+
+        }
+
+        fetchData().then(dataPoints => {
+            const day = dataPoints.map(dataPoint => dataPoint.day);
+            const amount = dataPoints.map(dataPoint => dataPoint.amount);
+            myChart.config.data.labels = day;
+            myChart.config.data.datasets[0].data = amount;
+            myChart.update()
+
+        })
+
+    }
+
+    const labels = [];
+
+    const data = {
+        labels: labels,
+        datasets: [{
+            backgroundColor: ['hsl(10, 79%, 65%)', 'hsl(10, 79%, 65%)', 'hsl(186, 34%, 60%)', 'hsl(10, 79%, 65%)', 'hsl(10, 79%, 65%)', 'hsl(10, 79%, 65%)', 'hsl(10, 79%, 65%)'],
+            borderColor: 'hsl(10, 79%, 65%)',
+            hoverBackgroundColor: ['hsla(10, 79%, 65%, 0.5)', 'hsla(10, 79%, 65%, 0.5)', 'hsla(186, 34%, 60%, 0.5)', 'hsla(10, 79%, 65%, 0.5)', 'hsla(10, 79%, 65%, 0.5)', 'hsla(10, 79%, 65%, 0.5)', 'hsla(10, 79%, 65%, 0.5)'],
+            data: [],
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            plugins: {
+                tooltip: {
+                    enabled: true,
+                    displayColors: false,
+                    position: 'average',
+                    yAlign: 'none',
+                    callbacks: {
+                        title: function(item, everything) {
+                            return;
+                        },
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: "",
+                        drawBorder: false,
+                    },
+                },
+                y: {
+                    display: false,
+                    grid: {
+                        color: "",
+                    }
+                }
+            },
+            borderRadius: 5,
+            borderSkipped: false,
+        }
+    }
+
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+
+    updateChart()
+</script>
+
+</html>

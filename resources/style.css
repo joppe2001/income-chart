@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+:root {
+    --soft-red: hsl(10, 79%, 65%);
+    --cyan-: hsl(186, 34%, 60%);
+    --dark-brown: hsl(25, 47%, 15%);
+    --medium-brown: hsl(28, 10%, 53%);
+    --cream-: hsl(27, 66%, 92%);
+    --pale-orange: hsl(33, 100%, 98%);
+}
+
+html {
+    font-size: min(18px, 21px);
+    font-family: 'DM sans';
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--cream-);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.center-column {
+    width: 100%;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: min(25%, 40%);
+    height: 55%;
+    transition: 1s;
+}
+
+.small-container {
+    background: var(--pale-orange);
+    border-radius: 10px;
+    padding: 1rem 1rem 0.5rem 1rem;
+    margin-top: 5%;
+}
+
+
+/* top container  */
+
+.balance-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--soft-red);
+    border-radius: 0.6rem;
+    color: hsl(33, 100%, 98%);
+    padding: 1.2rem;
+}
+
+.balance-info p {
+    margin: 0 0 0.1rem 0;
+}
+
+#balance {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0.1rem 0 0.1rem 0;
+}
+
+
+/* small dortof footer at the bottom of the container */
+
+.footer-small-container {
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+}
+
+#opacity-set {
+    opacity: 0.4;
+    font-weight: 400;
+}
+
+.percent-last-month {
+    text-align: right;
+    margin: 0 0.5rem 0 0;
+    padding-top: 2rem;
+    line-height: 0.1rem;
+}
+
+#total-this-month {
+    font-size: 1.6rem;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* media queries lmao */
+
+@media only screen and (max-width: 1150px) {
+    main {
+        width: 100%;
+    }
+    .center-column {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    main {
+        width: 100%;
+    }
+    .center-column {
+        width: 90%;
+    }
+}
